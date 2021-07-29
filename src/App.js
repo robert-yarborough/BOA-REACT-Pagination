@@ -13,7 +13,6 @@ function App() {
   }, [api_key]);
 
 
-
   return (
     <div className="App">
       <Table items={items}/>
