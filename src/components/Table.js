@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-const Table = ({items}) => {
-  console.log('items', items);
+const Table = (props) => {
+  console.log('items', props.items);
   return (
     <div>
-      {items.map((prop) => {
+      {props.items.map((prop) => {
         return (<table>
           <tr>
             <td>{prop.title}</td>

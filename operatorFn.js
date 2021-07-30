@@ -6,7 +6,7 @@ function operatorFn(arr){
   const filterEven = arr.filter((n) => {
     return n %  2 === 0;
   }).map((number) => {
-    let randomMultiplied = number * Math.floor(Math.random() * (100 - 0) + 0);
+    let randomMultiplied = number * Math.floor(Math.random() * (100 - 0));
     return randomMultiplied;
   }).sort();
 
