@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {fetchMovies} from './_service/fetchMoviesAPI';
 import Table from './components/Table';
-// import './App.css';
+import Pagination from "./components/Pagination";
 
-function App() {
+function App(){
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const api_key = process.env.REACT_APP_API_KEY;
 
@@ -22,10 +22,24 @@ function App() {
     }).catch((error) => console.log(error));
   }, [api_key]);
 
-  console.log('App: items', items)
+
+  // get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+
+
+  // change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
   return (
     <div className="App">
-      <Table items={items}/>
+      <Table loading={loading} items={items} />
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={items.length}
+        paginate={paginate} />
     </div>
   );
 }
