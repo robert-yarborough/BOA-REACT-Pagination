@@ -1,11 +1,14 @@
 import React from 'react';
 
 
-const Table = ({items, loading}) => {
+const Table = ({items, loading, totalPages}) => {
   console.log('items', items);
+  console.log('totalPages', totalPages);
+
   if(loading){
     return <h2>Loading...</h2>
   }
+
   return (
     <div>
         <table>
@@ -14,8 +17,8 @@ const Table = ({items, loading}) => {
             <col span={4} />
           </colgroup>
               <tbody>
-                  {items.map((prop) =>
-                      <tr>
+                  {items.map((prop, index) =>
+                      <tr key={index}>
                         <td>{prop.title}</td>
                         <td>{prop.vote_average}</td>
                         <td>{prop.vote_count}</td>
@@ -24,7 +27,6 @@ const Table = ({items, loading}) => {
                   )}
               </tbody>
                 </table>
-    </div>
-  )
+    </div>)
 };
 export default Table;

@@ -6,6 +6,7 @@ import Pagination from "./components/Pagination";
 function App(){
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const api_key = process.env.REACT_APP_API_KEY;
@@ -16,6 +17,7 @@ function App(){
     fetchMovies.get(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`).then((data) => {
         if(data){
           setLoading(true);
+          setTotalPages(data.total_pages);
           setItems(data.results);
           setLoading(false);
         }
@@ -35,7 +37,7 @@ function App(){
 
   return (
     <div className="App">
-      <Table loading={loading} items={items} />
+      <Table loading={loading} items={currentItems} totalPages={totalPages}/>
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={items.length}
